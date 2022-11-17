@@ -1,15 +1,18 @@
 <script setup>
 import { onMounted, ref, computed } from "vue";
 import Card from './components/Card.vue';
+import logo from './assets/pokemon-logo.png'
 import {shuffle} from 'lodash';
 
 const pokemons = [
-  { id: 1, name: "Balbosur" },
-  { id: 8, name: "Wartotle" },
-  { id: 9, name: "Blasoise" },
-  { id: 6, name: "Charizard" },
-  { id: 7, name: "Squirtle" },
-  { id: 25, name: "Pikachu" },
+  { id: 1, name: "bulbasaur" },
+  { id: 8, name: "wartortle" },
+  { id: 9, name: "blastoise" },
+  { id: 6, name: "charizard" },
+  { id: 7, name: "squirtle" },
+  { id: 25, name: "pikachu" },
+  { id: 26, name: "raichu" },
+  { id: 22, name: "fearow" },
 ];
 
 const pairOfPokemons = ref([])
@@ -55,7 +58,7 @@ const handleFlip = (index) => {
 
   moves.value += 1;
 
-  if(founded.value.length === 6){
+  if(founded.value.length === 8){
     setTimeout(()=>{
       over.value = true;
     }, 1000)
@@ -90,33 +93,35 @@ const resetPickedCard = () => {
   leave-to-class="opacity-0"
   >
     <div v-if="over" class="fixed z-10 inset-0 overflow-x-hidden overflow-y-auto flex justify-center items-center">
-      <div class="absolute inset-0 bg-zinc-800/30 backdrop-blur-sm"></div>
-      <div class="relative bg-white w-full max-w-sm rounded-xl shadow-md shadow-blue-600/40">
-        <h3 class="p-4 font-bold text-3xl text-blue-800 text-center">Game Over</h3>
-        <div class="p-4 text-center">
-          <p class="text-blue-800">Your score is: {{ score }}</p>
-          <p class="text-blue-800">Maked Moves: {{ moves }}</p>
-
-          <div class="mt-8 flex justify-center">
-            <button @click.prevent="handlePlayAgain" class="px-4 py-2 bg-blue-500 hover:bg-blue-400 font-semibold text-white text-sm rounded-xl shadow-md shadow-blue-600/40 transition duration-150">
+      <div class="absolute inset-0 bg-zinc-800/60" @click.prevent="handlePlayAgain"></div>
+      <div class="relative bg-white w-full max-w-sm rounded-xl shadow-lg shadow-zinc-600/40">
+        <h3 class="p-4 font-bold text-2xl text-blue-700 text-center">Game Over</h3>
+        <div class="p-4 text-center bg-blue-700">
+          <p class="text-white">Your score is: {{ score }}</p>
+          <p class="text-white">Maked Moves: {{ moves }}</p>
+        </div>
+        <div class="p-4 flex justify-center">
+            <button @click.prevent="handlePlayAgain" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 font-semibold text-white text-sm rounded-xl shadow-md shadow-blue-600/40 transition duration-150">
               Play Again
             </button>
           </div>
-        </div>
       </div>
     </div>
   </Transition> 
 
   <div class="relative h-screen flex justify-center items-center">
     <div class="py-4">
-      <h2 class="font-bold text-5xl text-blue-800 text-center">Pokemon Memo</h2>
+      <h2 class="font-bold text-3xl text-blue-800 text-center flex flex-col items-center">
+        <img :src="logo" alt="Pokemon memo" class="h-20">
+        <span>MEMO</span>
+      </h2>
       
       <div class="mt-8 flex justify-center items-center space-x-4">
         <p class="text-blue-800">Score: {{ score }}</p>
         <p class="text-blue-800">Moves: {{ moves }}</p>
       </div>
 
-      <div class="mt-4 grid grid-cols-4 gap-4">
+      <div class="mt-4 grid grid-cols-4 gap-4 bg-blue-200 p-4 rounded-xl">
         <div v-for="(pokemon, index) in pairOfPokemons" :key="index" class="card cursor-pointer">
           <Card 
             :pokemon="pokemon" 
