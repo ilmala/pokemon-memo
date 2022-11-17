@@ -109,10 +109,10 @@ const resetPickedCard = () => {
     </div>
   </Transition> 
 
-  <div class="relative h-screen flex justify-center items-center">
-    <div class="py-4">
-      <h2 class="font-bold text-3xl text-blue-800 text-center flex flex-col items-center">
-        <img :src="logo" alt="Pokemon memo" class="h-20">
+  <div class="relative h-screen flex justify-center">
+    <div class="pt-8 md:pt-12">
+      <h2 class="font-bold text-xl md:text-3xl text-blue-800 text-center flex flex-col items-center">
+        <img :src="logo" alt="Pokemon memo" class="h-14 mdh-20">
         <span>MEMO</span>
       </h2>
       
@@ -121,7 +121,7 @@ const resetPickedCard = () => {
         <p class="text-blue-800">Moves: {{ moves }}</p>
       </div>
 
-      <div class="mt-4 grid grid-cols-4 gap-4 bg-blue-200 p-4 rounded-xl">
+      <div class="mt-4 grid grid-cols-4 gap-2 md:gap-4 bg-blue-200 p-2 md:p-4 md:rounded-xl">
         <div v-for="(pokemon, index) in pairOfPokemons" :key="index" class="card cursor-pointer">
           <Card 
             :pokemon="pokemon" 
